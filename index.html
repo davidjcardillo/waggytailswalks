@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Waggy Tails Walks – Your Neighborhood Dog Walkers</title>
+<link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --orange: #FF8C00;
+    --orange-light: #FFB347;
+    --brown: #8B4513;
+    --cream: #FFF8F0;
+    --white: #fff;
+    --gray: #6b7280;
+    --light-gray: #f3f4f6;
+  }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--cream);
+    color: var(--brown);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--brown);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .nav-brand {
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 1.5rem;
+    color: var(--orange-light);
+    letter-spacing: 1px;
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 1.5rem; }
+  .nav-links a {
+    color: #FFE4B5;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--orange-light); }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--orange-light) 0%, var(--orange) 100%);
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    bottom: -30px;
+    left: 0; right: 0;
+    height: 60px;
+    background: var(--cream);
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  }
+  .hero-paws {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    animation: bounce 1.5s ease-in-out infinite alternate;
+  }
+  @keyframes bounce { from { transform: translateY(0); } to { transform: translateY(-12px); } }
+  .hero h1 {
+    font-family: 'Luckiest Guy', cursive;
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    color: var(--white);
+    letter-spacing: 2px;
+    text-shadow: 3px 3px 0 var(--brown);
+    line-height: 1.1;
+  }
+  .hero h1 span { color: var(--cream); }
+  .hero-sub {
+    margin: 1.2rem auto 0;
+    max-width: 520px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--brown);
+    opacity: 0.9;
+  }
+  .hero-cta {
+    margin-top: 2.2rem;
+    display: inline-block;
+    background: var(--brown);
+    color: var(--orange-light);
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    padding: 0.9rem 2.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+  }
+  .hero-cta:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.25); }
+
+  /* SECTIONS */
+  section { padding: 4rem 2rem; }
+  .section-title {
+    text-align: center;
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+    color: var(--brown);
+    margin-bottom: 0.4rem;
+  }
+  .section-subtitle {
+    text-align: center;
+    color: var(--gray);
+    font-size: 1rem;
+    margin-bottom: 2.5rem;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+
+  /* SERVICES */
+  .services { background: var(--white); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+  .service-card {
+    background: var(--cream);
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    border: 2px solid var(--orange-light);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .service-card:hover { transform: translateY(-5px); box-shadow: 0 8px 24px rgba(255,140,0,0.2); }
+  .service-icon { font-size: 2.5rem; margin-bottom: 0.8rem; }
+  .service-card h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--brown); }
+  .service-card p { font-size: 0.92rem; color: var(--gray); line-height: 1.6; }
+
+  /* PRICING */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .price-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 2rem 1.2rem;
+    text-align: center;
+    border: 2px solid transparent;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    transition: transform 0.2s;
+  }
+  .price-card:hover { transform: translateY(-4px); }
+  .price-card.featured { border-color: var(--orange); background: #FFF3E0; }
+  .price-badge {
+    display: inline-block;
+    background: var(--orange);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 3px 12px;
+    border-radius: 20px;
+    margin-bottom: 0.8rem;
+    letter-spacing: 0.5px;
+  }
+  .price-name { font-weight: 800; font-size: 1rem; color: var(--brown); }
+  .price-amount { font-family: 'Luckiest Guy', cursive; font-size: 2.5rem; color: var(--orange); margin: 0.3rem 0; }
+  .price-duration { font-size: 0.85rem; color: var(--gray); }
+  .price-details { margin-top: 1rem; font-size: 0.85rem; color: var(--gray); line-height: 1.7; }
+
+  /* ABOUT */
+  .about { background: var(--orange-light); }
+  .about-inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+  }
+  .about-avatars { display: flex; gap: 1.5rem; }
+  .avatar-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 1.5rem 1.2rem;
+    text-align: center;
+    width: 150px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  }
+  .avatar-circle {
+    width: 70px; height: 70px;
+    border-radius: 50%;
+    margin: 0 auto 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+  }
+  .avatar-name { font-weight: 800; font-size: 1.1rem; color: var(--brown); }
+  .avatar-role { font-size: 0.8rem; color: var(--gray); margin-top: 2px; }
+  .about-text { max-width: 440px; }
+  .about-text h2 { font-family: 'Luckiest Guy', cursive; font-size: 1.9rem; color: var(--brown); margin-bottom: 1rem; }
+  .about-text p { font-size: 0.98rem; line-height: 1.8; color: var(--brown); opacity: 0.85; margin-bottom: 0.8rem; }
+
+  /* WHY US */
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.2rem;
+  }
+  .why-item {
+    text-align: center;
+    padding: 1.5rem 1rem;
+    background: var(--white);
+    border-radius: 14px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  }
+  .why-icon { font-size: 2rem; margin-bottom: 0.6rem; }
+  .why-item h4 { font-weight: 800; font-size: 0.95rem; color: var(--brown); margin-bottom: 0.3rem; }
+  .why-item p { font-size: 0.82rem; color: var(--gray); line-height: 1.5; }
+
+  /* CONTACT */
+  .contact { background: var(--brown); }
+  .contact .section-title { color: var(--orange-light); }
+  .contact .section-subtitle { color: #FFE4B5; opacity: 0.8; }
+  .contact-form {
+    max-width: 560px;
+    margin: 0 auto;
+    background: var(--cream);
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  }
+  .form-row { margin-bottom: 1.2rem; }
+  .form-row label {
+    display: block;
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: var(--brown);
+    margin-bottom: 0.4rem;
+  }
+  .form-row input,
+  .form-row select,
+  .form-row textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--orange-light);
+    border-radius: 10px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    background: white;
+    color: var(--brown);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-row input:focus,
+  .form-row select:focus,
+  .form-row textarea:focus { border-color: var(--orange); }
+  .form-row textarea { height: 110px; resize: vertical; }
+  .form-two { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .submit-btn {
+    width: 100%;
+    background: var(--orange);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    margin-top: 0.5rem;
+  }
+  .submit-btn:hover { background: var(--brown); transform: translateY(-2px); }
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 2rem;
+  }
+  .form-success .big-emoji { font-size: 3rem; margin-bottom: 0.8rem; }
+  .form-success h3 { font-family: 'Luckiest Guy', cursive; font-size: 1.8rem; color: var(--orange); }
+  .form-success p { color: var(--brown); margin-top: 0.5rem; font-size: 0.95rem; }
+
+  /* FOOTER */
+  footer {
+    background: #3e1e08;
+    color: #FFE4B5;
+    text-align: center;
+    padding: 2rem 1rem;
+    font-size: 0.88rem;
+  }
+  footer a { color: var(--orange-light); text-decoration: none; }
+  footer .footer-logo {
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 1.4rem;
+    color: var(--orange-light);
+    margin-bottom: 0.5rem;
+  }
+  footer p { opacity: 0.7; margin-top: 0.3rem; }
+
+  @media (max-width: 600px) {
+    .form-two { grid-template-columns: 1fr; }
+    .about-avatars { flex-wrap: wrap; justify-content: center; }
+    nav .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="#top">🐾 Waggy Tails</a>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#about">About Us</a>
+    <a href="#contact">Book a Walk</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-paws">🐾</div>
+  <h1>Waggy Tails <span>Walks</span></h1>
+  <p class="hero-sub">Your friendly neighborhood dog walkers! We'll keep your pup happy, healthy, and wagging.</p>
+  <a href="#contact" class="hero-cta">Book a Walk Today 🐶</a>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="container">
+    <h2 class="section-title">Our Services</h2>
+    <p class="section-subtitle">We offer everything your dog needs to stay happy and active!</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🌅</div>
+        <h3>Morning Walks</h3>
+        <p>Start the day right! We'll get your pup moving bright and early before school.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">☀️</div>
+        <h3>Afternoon Walks</h3>
+        <p>Perfect for dogs who need a midday break while you're at work or school.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🏡</div>
+        <h3>Weekend Adventures</h3>
+        <p>Longer, fun-filled walks around the neighborhood on Saturdays and Sundays.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📸</div>
+        <h3>Photo Updates</h3>
+        <p>We'll send you adorable photos of your dog on every single walk. So cute!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="container">
+    <h2 class="section-title">Pricing</h2>
+    <p class="section-subtitle">Affordable rates for your neighborhood friends!</p>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-name">Quick Walk</div>
+        <div class="price-amount">$10</div>
+        <div class="price-duration">30 minutes</div>
+        <div class="price-details">
+          Around the block<br>
+          Photo update included<br>
+          Weekdays only
+        </div>
+      </div>
+      <div class="price-card featured">
+        <div class="price-badge">⭐ MOST POPULAR</div>
+        <div class="price-name">Full Walk</div>
+        <div class="price-amount">$15</div>
+        <div class="price-duration">60 minutes</div>
+        <div class="price-details">
+          Longer neighborhood route<br>
+          2 photo updates<br>
+          Any day of the week
+        </div>
+      </div>
+      <div class="price-card">
+        <div class="price-name">Weekend Fun</div>
+        <div class="price-amount">$18</div>
+        <div class="price-duration">75 minutes</div>
+        <div class="price-details">
+          Exploration walk<br>
+          Multiple photo updates<br>
+          Saturday & Sunday
+        </div>
+      </div>
+      <div class="price-card">
+        <div class="price-name">Monthly Pack</div>
+        <div class="price-amount">$50</div>
+        <div class="price-duration">5 walks / month</div>
+        <div class="price-details">
+          Save $25!<br>
+          Mix &amp; match lengths<br>
+          Priority scheduling
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-inner">
+      <div class="about-avatars">
+        <div class="avatar-card">
+          <div class="avatar-circle" style="background:#FFE4B5;">🧒</div>
+          <div class="avatar-name">Norah</div>
+          <div class="avatar-role">Co-founder & Walker</div>
+        </div>
+        <div class="avatar-card">
+          <div class="avatar-circle" style="background:#FFD580;">🧒</div>
+          <div class="avatar-name">Kelsey</div>
+          <div class="avatar-role">Co-founder & Walker</div>
+        </div>
+      </div>
+      <div class="about-text">
+        <h2>Hi, we're Norah & Kelsey! 👋</h2>
+        <p>We're two best friends and dog lovers from your neighborhood who started Waggy Tails Walks because we absolutely love dogs and want to help our neighbors!</p>
+        <p>We are responsible, caring, and always on time. Your dog will be in safe hands — and will probably have the best day ever on one of our walks! 🐾</p>
+        <p>We love all dogs — big ones, small ones, and everything in between!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section>
+  <div class="container">
+    <h2 class="section-title">Why Choose Us?</h2>
+    <p class="section-subtitle">Here's what makes Waggy Tails Walks special!</p>
+    <div class="why-grid">
+      <div class="why-item">
+        <div class="why-icon">🏘️</div>
+        <h4>Local & Nearby</h4>
+        <p>We live right in your neighborhood — no long waits!</p>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">💛</div>
+        <h4>Dog Obsessed</h4>
+        <p>We genuinely love every dog we walk. They can feel it!</p>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">⏰</div>
+        <h4>Always On Time</h4>
+        <p>Reliable and punctual on every single walk, every time.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">📱</div>
+        <h4>Stay Updated</h4>
+        <p>Get real-time photo updates straight to your phone!</p>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">🌟</div>
+        <h4>Trusted Neighbors</h4>
+        <p>Your neighbors already know and trust us!</p>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">💰</div>
+        <h4>Super Affordable</h4>
+        <p>Great service at prices that are easy on your wallet.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="container">
+    <h2 class="section-title">Book a Walk!</h2>
+    <p class="section-subtitle">Fill out the form below and we'll get back to you right away 🐾</p>
+    <div class="contact-form" id="contactForm">
+      <div class="form-two">
+        <div class="form-row">
+          <label for="fname">Your Name</label>
+          <input type="text" id="fname" placeholder="e.g. Sarah Smith"/>
+        </div>
+        <div class="form-row">
+          <label for="dog">Dog's Name</label>
+          <input type="text" id="dog" placeholder="e.g. Buddy"/>
+        </div>
+      </div>
+      <div class="form-two">
+        <div class="form-row">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="you@email.com"/>
+        </div>
+        <div class="form-row">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" placeholder="(555) 000-0000"/>
+        </div>
+      </div>
+      <div class="form-two">
+        <div class="form-row">
+          <label for="service">Walk Type</label>
+          <select id="service">
+            <option value="">Choose a walk...</option>
+            <option>Quick Walk – $10 (30 min)</option>
+            <option>Full Walk – $15 (60 min)</option>
+            <option>Weekend Fun – $18 (75 min)</option>
+            <option>Monthly Pack – $50 (5 walks)</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="date">Preferred Date</label>
+          <input type="date" id="date"/>
+        </div>
+      </div>
+      <div class="form-row">
+        <label for="notes">Anything we should know about your dog?</label>
+        <textarea id="notes" placeholder="Breed, age, any special needs, favorite toys..."></textarea>
+      </div>
+      <button class="submit-btn" onclick="submitForm()">Send My Request 🐾</button>
+    </div>
+
+    <div class="contact-form form-success" id="formSuccess">
+      <div class="big-emoji">🐶</div>
+      <h3>Woof! We Got It!</h3>
+      <p>Thanks for reaching out! Norah and Kelsey will get back to you super soon to confirm your walk.</p>
+      <p style="margin-top:1rem; font-weight:700;">We can't wait to meet your pup! 🐾</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">🐾 Waggy Tails Walks</div>
+  <p>Your friendly neighborhood dog walkers</p>
+  <p style="margin-top: 0.8rem;">📍 Your Neighborhood &nbsp;|&nbsp; 🌐 waggytailswalks.com</p>
+  <p style="margin-top: 0.8rem;">© 2026 Waggy Tails Walks. Made with ❤️ by Norah & Kelsey.</p>
+</footer>
+
+<script>
+  function submitForm() {
+    const name = document.getElementById('fname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const service = document.getElementById('service').value;
+    if (!name || !email || !service) {
+      alert('Please fill in your name, email, and walk type to continue!');
+      return;
+    }
+    document.getElementById('contactForm').style.display = 'none';
+    const success = document.getElementById('formSuccess');
+    success.style.display = 'block';
+  }
+</script>
+</body>
+</html>
