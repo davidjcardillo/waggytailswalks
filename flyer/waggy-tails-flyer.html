@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>Waggy Tails Walks – Flyer</title>
+<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #e5e5e5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    font-family: Georgia, serif;
+  }
+
+  .print-btn {
+    margin-bottom: 0.75rem;
+    background: #8B4513;
+    color: #FFB347;
+    border: none;
+    border-radius: 50px;
+    font-family: Georgia, serif;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0.6rem 1.8rem;
+    cursor: pointer;
+  }
+  .print-btn:hover { background: #6B3410; }
+  .hint {
+    font-family: Arial, sans-serif;
+    font-size: 0.8rem;
+    color: #555;
+    margin-bottom: 0.75rem;
+    text-align: center;
+  }
+
+  .flyer {
+    width: 8.5in;
+    height: 11in;
+    background: #FFF8F0;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .top-band {
+    background: #FFB347;
+    padding: 0.4rem 1rem 0.35rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-shrink: 0;
+  }
+  .dog-face { width: 68px; height: 68px; flex-shrink: 0; }
+
+  .title-inline { text-align: center; }
+  .title-inline h1 { font-size: 2.4rem; color: #8B4513; line-height: 1; }
+  .title-inline h2 { font-size: 1.1rem; color: #fff; letter-spacing: 6px; margin-top: 1px; }
+  .title-inline p { font-style: italic; font-size: 0.82rem; color: #8B4513; margin-top: 2px; }
+
+  .body {
+    flex: 1;
+    padding: 0.22in 0.55in 0.18in;
+    display: flex;
+    flex-direction: column;
+    gap: 0.14in;
+    overflow: hidden;
+  }
+
+  .card {
+    background: white;
+    border-radius: 9px;
+    border: 1.5px solid #FFB347;
+    padding: 0.13in 0.2in;
+    flex-shrink: 0;
+  }
+  .card-alt { background: #FFF3E0; }
+
+  .card-title {
+    text-align: center;
+    font-size: 0.88rem;
+    font-weight: bold;
+    color: #8B4513;
+    margin-bottom: 0.09in;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.1in;
+  }
+  .svc {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 3px;
+  }
+  .svc-icon {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: #FFB347;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem;
+  }
+  .svc h4 { font-size: 0.73rem; color: #8B4513; }
+  .svc p { font-size: 0.63rem; color: #888; font-family: Arial, sans-serif; line-height: 1.3; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 0.14in; flex-shrink: 0; }
+
+  .why-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 5px; }
+  .why-item { text-align: center; font-family: Arial, sans-serif; }
+  .why-item .wi { font-size: 1rem; }
+  .why-item h5 { font-size: 0.68rem; color: #8B4513; font-weight: bold; margin: 1px 0; }
+  .why-item p { font-size: 0.6rem; color: #999; }
+
+  .price-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 5px; text-align: center; }
+  .price-item { font-family: Arial, sans-serif; }
+  .price-amount { font-size: 1.1rem; font-weight: bold; color: #FF8C00; line-height: 1.1; }
+  .price-name { font-size: 0.68rem; font-weight: bold; color: #8B4513; }
+  .price-dur { font-size: 0.58rem; color: #aaa; }
+
+  .meet-inner { display: flex; justify-content: center; gap: 1.2rem; align-items: center; }
+  .avatar-wrap { text-align: center; }
+  .avatar {
+    width: 42px; height: 42px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: Arial, sans-serif; font-weight: bold; font-size: 0.7rem; color: white;
+    margin: 0 auto;
+  }
+  .avatar-wrap p { font-size: 0.6rem; color: #888; margin-top: 2px; font-family: Arial, sans-serif; }
+
+  .cta {
+    background: #8B4513;
+    border-radius: 9px;
+    padding: 0.14in 0.2in;
+    display: flex;
+    align-items: center;
+    gap: 0.16in;
+    flex-shrink: 0;
+  }
+  .cta-text { flex: 1; }
+  .cta-text p { color: #FFE4B5; font-size: 0.68rem; font-family: Arial, sans-serif; margin-bottom: 2px; }
+  .cta-text h3 { color: #FFB347; font-size: 1rem; margin-bottom: 2px; }
+  .cta-text small { color: #FFE4B5; font-size: 0.62rem; font-family: Arial, sans-serif; opacity: 0.85; }
+  .qr-wrap { background: white; border-radius: 7px; padding: 4px; flex-shrink: 0; }
+
+  @media print {
+    body { background: white; padding: 0; margin: 0; }
+    .print-btn, .hint { display: none; }
+    .flyer { border-radius: 0; width: 100%; height: 100vh; }
+    @page { size: letter; margin: 0; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨️ Print Flyer</button>
+<p class="hint">Open in Chrome or Edge → click Print Flyer → enable "Background graphics" in More settings.</p>
+
+<div class="flyer">
+
+  <div class="top-band">
+    <svg class="dog-face" viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="34" cy="36" rx="20" ry="28" fill="#6B3410" transform="rotate(-20 34 36)"/>
+      <ellipse cx="76" cy="36" rx="20" ry="28" fill="#6B3410" transform="rotate(20 76 36)"/>
+      <circle cx="55" cy="58" r="48" fill="#8B4513"/>
+      <ellipse cx="55" cy="66" rx="28" ry="22" fill="#C8956C"/>
+      <circle cx="40" cy="50" r="6" fill="#1a1a1a"/>
+      <circle cx="70" cy="50" r="6" fill="#1a1a1a"/>
+      <circle cx="42" cy="48" r="2" fill="white"/>
+      <circle cx="72" cy="48" r="2" fill="white"/>
+      <ellipse cx="55" cy="66" rx="8" ry="5" fill="#1a1a1a"/>
+      <path d="M44 75 Q55 85 66 75" fill="none" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round"/>
+      <ellipse cx="55" cy="83" rx="6" ry="8" fill="#FF6B6B"/>
+      <line x1="55" y1="75" x2="55" y2="91" stroke="#E05555" stroke-width="1.5"/>
+    </svg>
+    <div class="title-inline">
+      <h1>Waggy Tails Walks</h1>
+      <h2>🐾 &nbsp; W A L K S &nbsp; 🐾</h2>
+      <p>Your friendly neighborhood dog walking team!</p>
+    </div>
+  </div>
+
+  <div class="body">
+
+    <div class="card">
+      <div class="card-title">Our Services</div>
+      <div class="services-grid">
+        <div class="svc">
+          <div class="svc-icon">🌅</div>
+          <h4>Morning Walks</h4>
+          <p>Early walks to start your pup's day right</p>
+        </div>
+        <div class="svc">
+          <div class="svc-icon">☀️</div>
+          <h4>Afternoon Walks</h4>
+          <p>Midday breaks while you're away</p>
+        </div>
+        <div class="svc">
+          <div class="svc-icon">🏡</div>
+          <h4>Weekend Adventures</h4>
+          <p>Longer fun walks on Sat &amp; Sun</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card card-alt">
+        <div class="card-title">Why Choose Us?</div>
+        <div class="why-grid">
+          <div class="why-item"><div class="wi">⏰</div><h5>Always On Time</h5><p>Reliable every walk</p></div>
+          <div class="why-item"><div class="wi">💛</div><h5>Local Kids</h5><p>From your neighborhood</p></div>
+          <div class="why-item"><div class="wi">🐶</div><h5>Dog Lovers</h5><p>We truly care</p></div>
+          <div class="why-item"><div class="wi">📸</div><h5>Photo Updates</h5><p>Pics every walk!</p></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Pricing</div>
+        <div class="price-grid">
+          <div class="price-item"><div class="price-amount">$10</div><div class="price-name">Quick Walk</div><div class="price-dur">30 min</div></div>
+          <div class="price-item"><div class="price-amount">$15</div><div class="price-name">Full Walk</div><div class="price-dur">60 min</div></div>
+          <div class="price-item"><div class="price-amount">$18</div><div class="price-name">Weekend Fun</div><div class="price-dur">75 min</div></div>
+          <div class="price-item"><div class="price-amount">$50</div><div class="price-name">Monthly Pack</div><div class="price-dur">5 walks – save $25!</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Meet Your Walkers!</div>
+      <div class="meet-inner">
+        <div class="avatar-wrap">
+          <div class="avatar" style="background:#FFB347;">Norah</div>
+          <p>Co-founder &amp; Walker</p>
+        </div>
+        <div class="avatar-wrap">
+          <div class="avatar" style="background:#FF8C00;">Kelsey</div>
+          <p>Co-founder &amp; Walker</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta">
+      <div class="cta-text">
+        <p>Scan the QR code or visit us online:</p>
+        <h3>waggytailswalks.com</h3>
+        <small>Book a walk, see pricing &amp; meet Norah &amp; Kelsey! 🐾</small>
+      </div>
+      <div class="qr-wrap">
+        <canvas id="qrcode"></canvas>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+QRCode.toCanvas(document.getElementById('qrcode'), 'https://waggytailswalks.com', {
+  width: 85, margin: 1,
+  color: { dark: '#8B4513', light: '#ffffff' }
+});
+</script>
+</body>
+</html>
